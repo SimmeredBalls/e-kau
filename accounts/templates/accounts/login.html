@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - E-Kau</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error">{{ field.errors }}</div>
+                {% endif %}
+            {% endfor %}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<style>
+    body { 
+        font-family: Arial; 
+        background: #f2f2f2; }
+
+    .container { 
+        width: 400px; 
+        margin: 50px auto; 
+        background: white; 
+        padding: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 0 10px #ccc; }
+
+    h2 { 
+        text-align: center; }
+
+    label { 
+        display: block; 
+        margin-top: 10px; }
+
+    input { 
+        width: 100%; 
+        padding: 8px; 
+        margin-top: 5px; 
+        box-sizing: border-box; }
+
+    button { 
+        width: 100%; 
+        padding: 10px; 
+        margin-top: 15px; 
+        background: #4CAF50; 
+        color: white; 
+        border: none; 
+        cursor: pointer; 
+        border-radius: 4px; }
+
+    button:hover { 
+        background: #45a049; }
+
+    .error { 
+        color: red; 
+        margin-top: 5px; 
+        font-size: 0.9em; }
+
+</style>

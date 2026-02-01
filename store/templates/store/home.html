@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Kau</title>
+</head>
+<body>
+    <h1>Welcome to E-Kau</h1>
+
+    {% for product in products %}
+        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <strong>₱{{ product.price }}</strong>
+            <p>Stock: {{ product.stock }}</p>
+
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login to buy</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
